@@ -25,6 +25,10 @@ function screen(obj){
     delbtn.type="button";
     delbtn.value="Delete";
     delbtn.onclick=()=>{
+        const data=obj._id;
+        axios.delete(`https://crudcrud.com/api/ddb68e01deee4a9b8eff35c3de2b5ae2/appoinmentData/${data}`)
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err));
         //localStorage.removeItem(obj.exp);
         parentele.removeChild(child);
     }

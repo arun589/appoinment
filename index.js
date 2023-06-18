@@ -9,7 +9,7 @@ function savetolocalStorage(event){
         cat
     }
     //localStorage.setItem(obj.exp,JSON.stringify(obj));
-    axios.post("https://crudcrud.com/api/7803122e55284c98b66cf0acafd49a33/appointmentData",obj)
+    axios.post("https://crudcrud.com/api/ddb68e01deee4a9b8eff35c3de2b5ae2/appoinmentData",obj)
     .then((res=>{
         screen(obj);
     }))
@@ -43,37 +43,13 @@ function screen(obj){
     child.appendChild(editbtn);
     parentele.appendChild(child);
 }
-//window.addEventListener("DOMContentLoaded",load);
-function load(e)
-{
-    const par=document.getElementById("list")
-    for (const key in localStorage) {
-        if(key!==null){
-        const chi=document.createElement("li");
-        const item=JSON.parse(localStorage.getItem(key));
-        chi.textContent=item.exp+" - "+item.des+" - "+item.cat;
-        const delbtn=document.createElement("input");
-    delbtn.type="button";
-    delbtn.value="Delete";
-    delbtn.onclick=()=>{
-        localStorage.removeItem(item.exp);
-        par.removeChild(chi);
-    }
-    const editbtn=document.createElement("input");
-    editbtn.type="button"
-    editbtn.value="Edit";
-    editbtn.onclick=()=>{
-        localStorage.removeItem(item.exp);
-        par.removeChild(chi);
-        document.getElementById("expense").value=item.exp;
-        document.getElementById("description").value=item.des;
-        document.getElementById("category").value=item.cat;
-
-    }
-    chi.appendChild(delbtn);
-    chi.appendChild(editbtn);
-        
-        par.appendChild(chi);
-        }
-    }
-}
+window.addEventListener("DOMContentLoaded",()=>{
+    axios.get("https://crudcrud.com/api/ddb68e01deee4a9b8eff35c3de2b5ae2/appoinmentData")
+        .then((res)=>{
+            for(let i=0;i<res.data.length;i++)
+            {
+                screen(res.data[i]);
+            }
+        })
+        .catch((err)=>console.log(err));
+})

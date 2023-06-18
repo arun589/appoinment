@@ -9,7 +9,7 @@ function savetolocalStorage(event){
         cat
     }
     //localStorage.setItem(obj.exp,JSON.stringify(obj));
-    axios.post("https://crudcrud.com/api/ddb68e01deee4a9b8eff35c3de2b5ae2/appoinmentData",obj)
+    axios.post("https://crudcrud.com/api/531e8afa57fc4418a6b537449a801719/appoinmentData",obj)
     .then((res=>{
         screen(obj);
     }))
@@ -26,7 +26,7 @@ function screen(obj){
     delbtn.value="Delete";
     delbtn.onclick=()=>{
         const data=obj._id;
-        axios.delete(`https://crudcrud.com/api/ddb68e01deee4a9b8eff35c3de2b5ae2/appoinmentData/${data}`)
+        axios.delete(`https://crudcrud.com/api/531e8afa57fc4418a6b537449a801719/appoinmentData/${data}`)
         .then(res=>console.log(res))
         .catch(err=>console.log(err));
         //localStorage.removeItem(obj.exp);
@@ -37,18 +37,23 @@ function screen(obj){
     editbtn.value="Edit";
     editbtn.onclick=()=>{
         //localStorage.removeItem(obj.exp);
+        
+       const dat=obj._id;
+        axios.delete(`https://crudcrud.com/api/531e8afa57fc4418a6b537449a801719/appoinmentData/${dat}`)
+        .then(res=>console.log(res))
+        .catch(err=>alert(1));
+    
         parentele.removeChild(child);
         document.getElementById("expense").value=obj.exp;
         document.getElementById("description").value=obj.des;
         document.getElementById("category").value=obj.cat;
-
     }
     child.appendChild(delbtn);
     child.appendChild(editbtn);
     parentele.appendChild(child);
 }
 window.addEventListener("DOMContentLoaded",()=>{
-    axios.get("https://crudcrud.com/api/ddb68e01deee4a9b8eff35c3de2b5ae2/appoinmentData")
+    axios.get("https://crudcrud.com/api/531e8afa57fc4418a6b537449a801719/appoinmentData")
         .then((res)=>{
             for(let i=0;i<res.data.length;i++)
             {
